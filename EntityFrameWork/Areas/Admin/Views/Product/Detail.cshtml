@@ -1,0 +1,64 @@
+﻿@model Product
+
+
+
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<h1>Detail</h1>
+
+<div class="container my-5 ">
+
+   <form class="forms-sample" asp-action="Detail" >
+
+       <div class="form-group">
+              <span>Name</span>
+        <label class="form-label" for="customFile"></label>
+       
+        <textarea class="form-control" disabled id="customFile" asp-for="Name"></textarea>
+        <span class="text-danger" asp-validation-for="Name"></span>
+       </div>
+       
+    
+         <div class="form-group">
+          <span>Description</span>
+           <textarea class="form-control" disabled id="description-text" rows="3" asp-for="Description"></textarea> 
+       </div>
+      
+       <div class="form-group">
+        <span>Price</span>
+       <input type="number" class="form-control" disabled id="customFile" asp-for="Price" />
+       <span class="text-danger" asp-validation-for="Price"></span>
+       </div>
+      
+       <div class="form-group">
+        <span>Count</span>
+       <input class="form-control" disabled id="customFile" asp-for="Count" />
+       <span class="text-danger" asp-validation-for="Count"></span>
+       </div>
+
+       <div class="form-group">
+        <span>Category</span>
+        <select  class="form-control" disabled id="customFile" asp-for="CategoryId" asp-items="@ViewBag.Categories"></select>
+       </div>
+
+       <div class="form-group">
+         <span>Photos</span>
+        @foreach (var item in Model.Images)
+            {
+                <img src="~/img/@item.Image" style="width:100px; height:100px;" />
+            }
+            
+
+       </div>
+       
+       <div class="buttons my-3">
+       <a class="btn btn-primary" asp-action="Index">Cancel</a>
+       </div>
+ 
+   </form>
+
+  
+
+</div>
