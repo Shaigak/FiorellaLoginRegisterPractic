@@ -1,4 +1,5 @@
 using EntityFrameWork.Data;
+using EntityFrameWork.Helpers;
 using EntityFrameWork.Models;
 using EntityFrameWork.Services;
 using EntityFrameWork.Services.Interfaces;
@@ -31,14 +32,14 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequireUppercase = true;
     options.Password.RequireNonAlphanumeric = true;
 
-
+    options.SignIn.RequireConfirmedEmail = true;
     options.User.RequireUniqueEmail = true;
     options.Lockout.MaxFailedAccessAttempts = 3;
     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
     options.Lockout.AllowedForNewUsers = true;
 
 });
-
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 builder.Services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
 builder.Services.AddScoped<ILayoutService, LayoutService>();
 builder.Services.AddScoped<IBasketService, BasketService>();
@@ -50,6 +51,9 @@ builder.Services.AddScoped<ISliderImageService, SliderImageService>();
 builder.Services.AddScoped<IWorkerService, WorkerService>();
 builder.Services.AddScoped<IFlowerService, FlowerService>();
 builder.Services.AddScoped<IFooterService, FooterService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+
+builder.Services.AddScoped<EmailSettings>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -17,7 +17,5 @@ namespace EntityFrameWork.ViewComponents
             return await Task.FromResult(View(await _footerService.GetFooter()));
         }
 
-
-
     }
 }
